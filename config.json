@@ -1,0 +1,134 @@
+{
+  "site": {
+    "domain": "hanscloudserge.web.id",
+    "handle": "noticesa",
+    "maintenance": {
+      "enabled": false,
+      "title": "Under maintenance",
+      "message": "Back shortly — tuning on device.",
+      "eta": ""
+    },
+    "theme": "dark"
+  },
+  "profile": {
+    "name": "Muhammad Wildhan Anatayya",
+    "short_name": "Andrés de Fonollosa",
+    "photo": "assets/photo-1789652220.jpg",
+    "email": "mhdwildhan@gmail.com",
+    "telegram": "https://t.me/noticesa",
+    "github": "https://github.com/itswill00",
+    "channel": "https://t.me/blueforbanister"
+  },
+  "facts": {
+    "location": {
+      "en": "East Java, Indonesia (GMT+7)",
+      "id": "Jawa Timur, Indonesia (GMT+7)"
+    },
+    "devices": "Redmi Note 14 4G (tanzanite) | Redmi Note 8 (ginkgo)",
+    "focus": {
+      "en": "MediaTek MT6789 kernel tuning, Android system daemons & local automation",
+      "id": "Tuning kernel MediaTek MT6789, daemon sistem Android & automasi lokal"
+    },
+    "stack": [
+      "C (clang)",
+      "Python 3",
+      "POSIX Shell",
+      "Linux Kernel",
+      "SQLite WAL"
+    ]
+  },
+  "activities": [
+    {
+      "title": "HyperCore",
+      "tag": "Kernel / MT6789",
+      "meta": "Target: 6nm ARM64 | C / Make",
+      "desc": {
+        "en": "Hardware tuning, memory allocation optimizations, and kernel modules crafted for MediaTek MT6789 devices.",
+        "id": "Tuning hardware, optimasi alokasi memori, dan modul kernel untuk perangkat MediaTek MT6789."
+      },
+      "href": "https://github.com/itswill00/hypercore",
+      "enabled": true,
+      "order": 0
+    },
+    {
+      "title": "HyperNet",
+      "tag": "Network / Android",
+      "meta": "Netd / TCP BBR | C & Shell",
+      "desc": {
+        "en": "Standalone network diagnostic tool, low-overhead speedtest, cellular connection monitoring, and TCP/IP stack tuning.",
+        "id": "Tool diagnostik jaringan mandiri, speedtest ringan, monitoring koneksi seluler, dan tuning stack TCP/IP."
+      },
+      "href": "https://github.com/itswill00/HyperNet",
+      "enabled": true,
+      "order": 1
+    },
+    {
+      "title": "HyperRing",
+      "tag": "Daemon / Overlay",
+      "meta": "MIUI IPC | Native C",
+      "desc": {
+        "en": "Lightweight notification daemon and overlay integration hook designed natively for MIUI / HyperOS frameworks.",
+        "id": "Daemon notifikasi ringan dan overlay hook yang diintegrasikan langsung ke framework MIUI / HyperOS."
+      },
+      "href": "https://github.com/itswill00/HyperRing",
+      "enabled": true,
+      "order": 2
+    },
+    {
+      "title": "PyGramX",
+      "tag": "Automation",
+      "meta": "SQLite WAL | Python 3.11",
+      "desc": {
+        "en": "Fast Telegram userbot & companion daemon built to run 24/7 on-device without outside servers.",
+        "id": "Userbot & companion daemon Telegram yang dirancang jalan 24/7 di perangkat tanpa server luar."
+      },
+      "href": "https://t.me/noticesa",
+      "enabled": true,
+      "order": 3
+    }
+  ],
+  "i18n": {
+    "en": {
+      "hero_title": "Writing C, tuning kernels, and shipping tools that live right on physical hardware.",
+      "hero_bio": "I’m Wildhan (<b>@noticesa</b>), an independent software builder based in East Java. No cloud dependencies, no speculative abstractions. Most of my work runs locally on physical Android devices—building kernel modules, patching system daemons, and writing low-overhead tools that stay fast on constrained silicon.",
+      "btn_email": "Get in touch",
+      "btn_projects": "Projects ↓",
+      "sec_about": "Hardware & Environment",
+      "sec_about_sub": "Rig specs",
+      "lbl_location": "Base",
+      "lbl_devices": "Hardware Rig",
+      "lbl_focus": "Current Work",
+      "lbl_stack": "Core Toolchain",
+      "sec_activities": "Systems & Projects",
+      "sec_activities_sub": "Active repositories",
+      "sec_notes": "Engineering Principles",
+      "sec_notes_sub": "Invariants",
+      "notes_text": "Prefer zero runtime bloat over convenience. If a utility can run reliably as a native single binary or lean script on local hardware without cloud servers, that's where it belongs.",
+      "cta_title": "Have an idea or want to talk low-level systems?",
+      "cta_sub": "I’m around on Telegram pretty much daily. Send a message if you want to discuss.",
+      "cta_btn": "Ping @noticesa",
+      "footer_tag": "Self-hosted & served directly from an Android device."
+    },
+    "id": {
+      "hero_title": "Nulis C, ngulik kernel, dan bangun tooling mandiri langsung di hardware fisik.",
+      "hero_bio": "Gue Wildhan (<b>@noticesa</b>) dari Jawa Timur. Tanpa server cloud sewaan, tanpa abstraksi berlebihan. Sebagian besar hal yang gue bangun jalan langsung di perangkat fisik—ngoprek modul kernel, nge-patch daemon sistem Android, dan nulis tooling ringan yang tetap kencang di hardware terbatas.",
+      "btn_email": "Kirim Pesan",
+      "btn_projects": "Eksplorasi Proyek ↓",
+      "sec_about": "Hardware & Environment",
+      "sec_about_sub": "Spesifikasi rig",
+      "lbl_location": "Lokasi",
+      "lbl_devices": "Hardware Rig",
+      "lbl_focus": "Fokus Riset",
+      "lbl_stack": "Toolchain Utama",
+      "sec_activities": "Sistem & Proyek",
+      "sec_activities_sub": "Repositori aktif",
+      "sec_notes": "Prinsip Kerja",
+      "sec_notes_sub": "Invarian",
+      "notes_text": "Prioritaskan performa murni daripada kenyamanan abstraction layer. Kalau sebuah tool bisa jalan stabil sebagai native binary atau skrip mandiri di hardware lokal tanpa server luar, di situlah tempatnya.",
+      "cta_title": "Punya ide atau mau diskusi sistem tingkat rendah?",
+      "cta_sub": "Gue aktif setiap hari di Telegram. Ping aja kalau ada yang menarik buat dibahas.",
+      "cta_btn": "Ping @noticesa",
+      "footer_tag": "Self-hosted & di-host mandiri dari perangkat Android."
+    }
+  }
+}
