@@ -3,228 +3,197 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Muhammad Wildhan Anatayya, Builder</title>
-<meta name="description" content="Muhammad Wildhan Anatayya (itswill00). On-device tooling, Android internals and systems.">
+<title>Muhammad Wildhan Anatayya — Builder</title>
+<meta name="description" content="Muhammad Wildhan Anatayya. On-device tooling, Android internals and systems.">
+<meta name="theme-color" content="#09090b">
+<meta property="og:title" content="Muhammad Wildhan Anatayya — Builder">
+<meta property="og:description" content="Writing C, tuning kernels, shipping tools on real hardware.">
+<meta property="og:type" content="website">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter','Plus Jakarta Sans','system-ui','sans-serif'],
+        mono: ['JetBrains Mono','ui-monospace','Menlo','monospace'],
+      },
+      colors: {
+        ink: '#09090b',
+        panel: '#101013',
+        line: 'rgba(255,255,255,0.08)',
+        accent: '#ea580c',
+      }
+    }
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0E0D0B; --surface:#161412; --surface2:#1D1A17;
-  --border:#2A2623; --border-soft:#231F1C;
-  --text:#EDE9E3; --muted:#B4ABA1; --faint:#9C948B;
-  --accent:#C2521A; --accent-ink:#E8823F;
-  --radius:14px; --radius-sm:10px;
-  --max:1060px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;letter-spacing:-0.01em;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.skip{position:absolute;left:12px;top:-60px;background:var(--text);color:#111;padding:10px 14px;border-radius:10px;z-index:200;font-size:13px;font-weight:600}
-.skip:focus{top:12px}
-:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px;border-radius:6px}
-header{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border-soft)}
-.bar{max-width:var(--max);margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:8px;min-height:64px}
-.brand{font-weight:700;font-size:16px;letter-spacing:-0.02em;margin-right:auto}
-.brand small{color:var(--faint);font-weight:500;font-size:12px;margin-left:8px}
-nav{display:flex;align-items:center;gap:4px}
-.nav-link{display:inline-flex;align-items:center;min-height:44px;padding:10px 12px;font-size:13.5px;color:var(--muted);text-decoration:none;border-radius:10px}
-.nav-link:hover{color:var(--text);background:rgba(255,255,255,.04)}
-.lang-btn{min-height:44px;min-width:52px;font:inherit;font-size:13px;font-weight:600;color:var(--text);background:transparent;border:1px solid var(--border);border-radius:10px;cursor:pointer;padding:10px 12px}
-.lang-btn:hover{border-color:var(--accent)}
-main{max-width:var(--max);margin:0 auto;padding:0 20px}
-.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;padding:56px 0 40px;align-items:start}
-.kicker{font-size:13px;color:var(--accent-ink);font-weight:600;margin-bottom:12px}
-h1{font-size:clamp(30px,4.6vw,46px);line-height:1.08;letter-spacing:-0.03em;margin-bottom:14px;text-wrap:pretty}
-.lede{font-size:15.5px;color:var(--muted);max-width:56ch}
-.lede b{color:var(--text);font-weight:600}
-.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.btn{display:inline-flex;align-items:center;min-height:44px;padding:11px 18px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;text-decoration:none;border:1px solid var(--border);color:var(--text);background:transparent}
-.btn-solid{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn-solid:hover{background:#A84415}
-.btn:hover{border-color:var(--accent)}
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
-.panel-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.avatar{width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0;background:var(--surface2);border:1px solid var(--border);display:grid;place-items:center;font-weight:700;font-size:20px;color:var(--accent-ink)}
-.avatar img{width:100%;height:100%;object-fit:cover;display:none}
-.panel-head .who{font-size:14px;font-weight:600}
-.panel-head .who span{display:block;font-size:12px;color:var(--faint);font-weight:500}
-.kv{display:grid;grid-template-columns:110px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--border-soft);font-size:13px}
-.kv:first-of-type{border-top:none}
-.kv .k{color:var(--faint)}
-.kv .v{color:var(--text);word-break:break-word}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.chip{font-size:12px;padding:7px 11px;min-height:32px;display:inline-flex;align-items:center;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted)}
-.social{display:flex;gap:8px;margin-top:16px}
-.social a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:10px;border-radius:10px;border:1px solid var(--border);color:var(--muted);text-decoration:none;font-size:13px;font-weight:600}
-.social a:hover{color:var(--text);border-color:var(--accent)}
-section.block{padding:36px 0;border-top:1px solid var(--border-soft)}
-.sec-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;margin-bottom:6px}
-h2{font-size:clamp(22px,3vw,30px);letter-spacing:-0.025em;line-height:1.15}
-.sec-sub{color:var(--muted);font-size:14px;max-width:60ch;margin:8px 0 20px}
-.count{font-size:12px;color:var(--faint);border:1px solid var(--border);border-radius:999px;padding:8px 12px;white-space:nowrap}
-.proj-list{border-top:1px solid var(--border)}
-.proj{display:grid;grid-template-columns:56px 1fr auto;gap:16px;padding:20px 4px;border-bottom:1px solid var(--border-soft);text-decoration:none;align-items:start}
-.proj:hover{background:rgba(255,255,255,.02)}
-.proj .idx{font-size:13px;color:var(--accent-ink);padding-top:3px}
-.proj h3{font-size:17px;letter-spacing:-0.015em;margin-bottom:6px}
-.proj.featured h3{font-size:19px}
-.proj p{font-size:13.5px;color:var(--muted);max-width:62ch}
-.proj .meta{font-size:12px;color:var(--faint);margin-top:8px}
-.proj .go{font-size:13px;font-weight:600;color:var(--muted);border:1px solid var(--border);border-radius:10px;padding:10px 14px;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
-.proj:hover .go{color:var(--text);border-color:var(--accent)}
-.rig{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
-.rig-row{display:grid;grid-template-columns:180px 1fr;gap:14px;padding:14px 18px;border-bottom:1px solid var(--border-soft);font-size:14px}
-.rig-row:last-child{border-bottom:none}
-.rig-row .k{color:var(--faint);font-size:12.5px;padding-top:2px}
-.principle{padding:44px 0;border-top:1px solid var(--border-soft)}
-.principle blockquote{font-size:clamp(19px,2.6vw,25px);line-height:1.45;letter-spacing:-0.02em;max-width:32ch}
-.principle cite{display:block;margin-top:14px;font-style:normal;font-size:13px;color:var(--faint)}
-.contact{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px}
-.contact h2{margin-bottom:8px}
-.contact p{color:var(--muted);font-size:14px;max-width:52ch}
-.contact .actions{display:flex;flex-wrap:wrap;gap:10px}
-footer{border-top:1px solid var(--border-soft);margin-top:20px;padding:26px 20px 40px;text-align:left;color:var(--faint);font-size:12.5px}
-.foot{max-width:var(--max);margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
-.foot-links{display:flex;gap:4px}
-.foot-links a{color:var(--muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:10px 8px}
-.foot-links a:hover{color:var(--text);text-decoration:underline;text-underline-offset:4px}
-.state{border:1px solid var(--border);border-radius:12px;padding:18px;font-size:14px;color:var(--muted);background:var(--surface);margin-top:12px}
-.state.error{display:none;border-color:rgba(194,82,26,.5)}
-.skel{display:flex;flex-direction:column;gap:10px;padding:20px 4px;border-bottom:1px solid var(--border-soft)}
-.skel i{display:block;height:12px;border-radius:8px;background:linear-gradient(90deg,#1D1A17 25%,#2A2623 50%,#1D1A17 75%);background-size:200% 100%;animation:sh 1.1s linear infinite}
-@keyframes sh{to{background-position:-200% 0}}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--text);color:#111;padding:10px 16px;min-height:44px;display:flex;align-items:center;border-radius:12px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:99}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.m-overlay{position:fixed;inset:0;z-index:90;display:none;place-items:center;background:rgba(14,13,11,.94);padding:20px}
-.m-overlay.on{display:grid}
-.m-card{max-width:520px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center}
-.m-card h2{margin-bottom:8px}
-.m-card p{color:var(--muted);font-size:14px}
-@media(max-width:860px){
-  .hero{grid-template-columns:1fr;padding:36px 0 28px}
-  .proj{grid-template-columns:40px 1fr}
-  .proj .go{display:none}
-  .rig-row{grid-template-columns:1fr;gap:4px}
-  .contact{grid-template-columns:1fr}
-  .sec-head{grid-template-columns:1fr}
-  .brand small{display:none}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important}
-}
+  html{scroll-behavior:smooth}
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:#ea580c;color:#fff}
+  :focus-visible{outline:2px solid #fb923c;outline-offset:3px;border-radius:8px}
+  .card-hover{transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,border-color .25s}
+  .card-hover:hover{transform:translateY(-2px)}
+  .proj-arrow{transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,color .25s,border-color .25s}
+  .group:hover .proj-arrow{transform:translate(2px,-2px)}
+  .skel{background:linear-gradient(90deg,rgba(255,255,255,.06) 25%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.06) 75%);background-size:200% 100%;animation:sh 1.1s linear infinite}
+  @keyframes sh{to{background-position:-200% 0}}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body id="top">
-<a class="skip" href="#main">Skip to content</a>
-<div id="mOverlay" class="m-overlay" role="alert"><div class="m-card"><h2 id="mTitle">Under maintenance</h2><p id="mMsg">Back shortly.</p></div></div>
-<header>
-  <div class="bar">
-    <div class="brand"><span id="navBrand">Wildhan</span><small id="navDomain">on-device</small></div>
-    <nav aria-label="Primary">
-      <a class="nav-link" href="#top">Home</a>
-      <a class="nav-link" href="#projects">Work</a>
-      <a class="nav-link" href="#rig">Rig</a>
-      <a class="nav-link" href="#contact">Contact</a>
-      <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">EN</button>
+<body id="top" class="bg-[#09090b] text-zinc-100 font-sans min-h-screen leading-relaxed">
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:bg-white focus:text-black focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
+
+<div id="mOverlay" class="fixed inset-0 z-[90] hidden place-items-center bg-[#09090b]/95 p-6">
+  <div class="max-w-md w-full text-center bg-white/[0.04] border border-white/10 rounded-2xl p-8">
+    <div class="font-mono text-xs uppercase tracking-[0.2em] text-orange-400 mb-3">Maintenance</div>
+    <h2 id="mTitle" class="text-2xl font-bold tracking-tight mb-2">Under maintenance</h2>
+    <p id="mMsg" class="text-sm text-zinc-400">Back shortly.</p>
+  </div>
+</div>
+
+<header class="sticky top-0 z-50 border-b border-white/[0.07] bg-[#09090b]/80 backdrop-blur-xl">
+  <div class="max-w-5xl mx-auto px-5 h-16 flex items-center gap-2">
+    <a href="#top" class="mr-auto flex items-baseline gap-2.5 min-h-[44px] items-center">
+      <span id="navBrand" class="font-bold tracking-tight text-[15px]">Wildhan</span>
+      <span id="navDomain" class="hidden sm:inline font-mono text-[11px] text-zinc-500 border border-white/10 rounded-full px-2.5 py-1">on-device</span>
+    </a>
+    <nav class="flex items-center gap-1 text-[13.5px]" aria-label="Primary">
+      <a href="#projects" class="px-3 py-2.5 min-h-[44px] inline-flex items-center rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition">Work</a>
+      <a href="#rig" class="px-3 py-2.5 min-h-[44px] inline-flex items-center rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition">Rig</a>
+      <a href="#contact" class="px-3 py-2.5 min-h-[44px] inline-flex items-center rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition">Contact</a>
+      <button id="langBtn" type="button" class="ml-1 min-h-[40px] min-w-[52px] px-3 rounded-lg border border-white/10 text-[12px] font-mono font-medium hover:border-orange-500/60 transition" aria-label="Switch language">EN</button>
     </nav>
   </div>
 </header>
-<main id="main">
-  <div class="hero">
+
+<main id="main" class="max-w-5xl mx-auto px-5">
+  <!-- HERO -->
+  <div class="grid lg:grid-cols-[1.2fr_.8fr] gap-10 lg:gap-12 py-14 lg:py-20 items-start">
     <div>
-      <div class="kicker mono" id="heroKicker">East Java, Indonesia</div>
-      <h1 id="heroTitle">Writing C, tuning kernels, shipping tools on real hardware.</h1>
-      <p class="lede" id="heroBio"></p>
-      <div class="cta-row">
-        <a class="btn btn-solid" id="ctaEmail" href="mailto:mhdwildhan@gmail.com">Email Wildhan</a>
-        <a class="btn" id="ctaTg" href="https://t.me/noticesa" target="_blank" rel="noopener">Ping on Telegram</a>
+      <div class="flex items-center gap-2.5 mb-5">
+        <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span></span>
+        <span id="heroKicker" class="font-mono text-[12px] uppercase tracking-[0.18em] text-zinc-400">East Java, Indonesia</span>
       </div>
+      <h1 id="heroTitle" class="text-[clamp(2.1rem,5vw,3.4rem)] font-extrabold tracking-[-0.03em] leading-[1.05] text-balance mb-5">Writing C, tuning kernels, shipping tools on real hardware.</h1>
+      <p id="heroBio" class="text-zinc-400 text-[15.5px] leading-[1.75] max-w-[58ch]"></p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a id="ctaEmail" href="mailto:mhdwildhan@gmail.com" class="inline-flex items-center min-h-[46px] px-5 rounded-xl bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition">Email Wildhan →</a>
+        <a id="ctaTg" href="https://t.me/noticesa" target="_blank" rel="noopener" class="inline-flex items-center min-h-[46px] px-5 rounded-xl border border-white/12 text-sm font-semibold text-zinc-200 hover:border-orange-500/70 hover:text-white transition">Ping on Telegram</a>
+      </div>
+      <div id="chipsRow" class="flex flex-wrap gap-2 mt-7"></div>
     </div>
-    <aside class="panel" aria-label="Current setup">
-      <div class="panel-head">
-        <div class="avatar" id="avatarBox"><span id="avatarInitial">W</span><img id="avatarImg" alt="Portrait of Wildhan"></div>
-        <div><div class="who"><span id="panelName">Muhammad Wildhan Anatayya</span><span id="panelHandle">@noticesa</span></div></div>
+
+    <aside class="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 lg:sticky lg:top-24" aria-label="Profile">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="w-14 h-14 rounded-xl overflow-hidden bg-white/5 border border-white/10 grid place-items-center font-bold text-lg text-orange-400 shrink-0">
+          <span id="avatarInitial">W</span>
+          <img id="avatarImg" class="w-full h-full object-cover hidden" alt="Portrait of Wildhan">
+        </div>
+        <div class="min-w-0">
+          <div id="panelName" class="font-semibold text-[14.5px] tracking-tight truncate">Muhammad Wildhan Anatayya</div>
+          <div id="panelHandle" class="font-mono text-xs text-zinc-500">@noticesa</div>
+        </div>
+        <span class="ml-auto font-mono text-[10px] uppercase tracking-widest text-emerald-400 border border-emerald-400/20 bg-emerald-400/10 rounded-full px-2.5 py-1">open</span>
       </div>
-      <div class="kv"><div class="k mono" id="tBase">Base</div><div class="v" id="factLocation"></div></div>
-      <div class="kv"><div class="k mono" id="tRig">Rig</div><div class="v" id="factDevices"></div></div>
-      <div class="kv"><div class="k mono" id="tFocus">Focus</div><div class="v" id="factFocus"></div></div>
-      <div class="chips" id="chipsRow"></div>
-      <div class="social">
-        <a id="sEmail" href="mailto:mhdwildhan@gmail.com">Email</a>
-        <a id="sGithub" href="https://github.com/itswill00" target="_blank" rel="noopener">GitHub</a>
-        <a id="sTg" href="https://t.me/noticesa" target="_blank" rel="noopener">Telegram</a>
+      <dl class="text-[13px] divide-y divide-white/[0.07]">
+        <div class="grid grid-cols-[88px_1fr] gap-3 py-3"><dt id="tBase" class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 pt-0.5">Base</dt><dd id="factLocation" class="text-zinc-200"></dd></div>
+        <div class="grid grid-cols-[88px_1fr] gap-3 py-3"><dt id="tRig" class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 pt-0.5">Rig</dt><dd id="factDevices" class="text-zinc-200"></dd></div>
+        <div class="grid grid-cols-[88px_1fr] gap-3 py-3"><dt id="tFocus" class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 pt-0.5">Focus</dt><dd id="factFocus" class="text-zinc-200"></dd></div>
+      </dl>
+      <div class="grid grid-cols-3 gap-2 mt-4">
+        <a id="sEmail" href="mailto:mhdwildhan@gmail.com" class="min-h-[44px] inline-flex items-center justify-center rounded-lg border border-white/10 text-[12.5px] font-semibold text-zinc-300 hover:text-white hover:border-orange-500/60 transition">Email</a>
+        <a id="sGithub" href="https://github.com/itswill00" target="_blank" rel="noopener" class="min-h-[44px] inline-flex items-center justify-center rounded-lg border border-white/10 text-[12.5px] font-semibold text-zinc-300 hover:text-white hover:border-orange-500/60 transition">GitHub</a>
+        <a id="sTg" href="https://t.me/noticesa" target="_blank" rel="noopener" class="min-h-[44px] inline-flex items-center justify-center rounded-lg border border-white/10 text-[12.5px] font-semibold text-zinc-300 hover:text-white hover:border-orange-500/60 transition">Telegram</a>
       </div>
     </aside>
   </div>
 
-  <section class="block" id="projects" aria-labelledby="tWork">
-    <div class="sec-head">
-      <h2 id="tWork">Systems and projects</h2>
-      <span class="count mono" id="projCount">4 items</span>
+  <!-- PROJECTS -->
+  <section id="projects" class="py-12 border-t border-white/[0.07]" aria-labelledby="tWork">
+    <div class="flex items-end justify-between gap-4 mb-2">
+      <div>
+        <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-orange-400/90 mb-2">01 — Selected work</div>
+        <h2 id="tWork" class="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-[-0.02em]">Systems and projects</h2>
+      </div>
+      <span id="projCount" class="font-mono text-[11px] text-zinc-500 border border-white/10 rounded-full px-3 py-2 whitespace-nowrap">4 items</span>
     </div>
-    <p class="sec-sub" id="tWorkSub"></p>
-    <div class="proj-list" id="actStack">
-      <div class="skel" aria-hidden="true"><i style="width:32%"></i><i style="width:88%"></i><i style="width:60%"></i></div>
-      <div class="skel" aria-hidden="true"><i style="width:28%"></i><i style="width:84%"></i><i style="width:58%"></i></div>
+    <p id="tWorkSub" class="text-sm text-zinc-500 mb-8 max-w-[60ch]"></p>
+    <div id="actStack" class="grid gap-3">
+      <div class="rounded-xl border border-white/[0.07] p-5 space-y-3" aria-hidden="true"><div class="skel h-3 w-1/3 rounded-md"></div><div class="skel h-3 w-11/12 rounded-md"></div><div class="skel h-3 w-2/3 rounded-md"></div></div>
+      <div class="rounded-xl border border-white/[0.07] p-5 space-y-3" aria-hidden="true"><div class="skel h-3 w-1/4 rounded-md"></div><div class="skel h-3 w-10/12 rounded-md"></div><div class="skel h-3 w-3/5 rounded-md"></div></div>
     </div>
-    <div class="state error" id="actError" role="alert"></div>
+    <div id="actError" role="alert" class="hidden mt-4 rounded-xl border border-orange-500/30 bg-orange-500/10 p-4 text-sm text-zinc-300"></div>
   </section>
 
-  <section class="block" id="rig" aria-labelledby="tRigTitle">
-    <div class="sec-head"><h2 id="tRigTitle">Hardware and environment</h2></div>
-    <p class="sec-sub" id="tRigSub"></p>
-    <div class="rig">
-      <div class="rig-row"><div class="k mono" id="rBase">Base</div><div id="rigLocation"></div></div>
-      <div class="rig-row"><div class="k mono" id="rDevices">Hardware rig</div><div id="rigDevices"></div></div>
-      <div class="rig-row"><div class="k mono" id="rFocus">Current work</div><div id="rigFocus"></div></div>
-      <div class="rig-row"><div class="k mono" id="rStack">Core toolchain</div><div id="rigStack"></div></div>
+  <!-- RIG -->
+  <section id="rig" class="py-12 border-t border-white/[0.07]" aria-labelledby="tRigTitle">
+    <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-orange-400/90 mb-2">02 — Environment</div>
+    <h2 id="tRigTitle" class="text-[clamp(1.5rem,3vw,2rem)] font-bold tracking-[-0.02em] mb-2">Hardware and environment</h2>
+    <p id="tRigSub" class="text-sm text-zinc-500 mb-8"></p>
+    <div class="grid sm:grid-cols-2 gap-3">
+      <div class="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5 card-hover hover:bg-white/[0.04]"><div id="rBase" class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 mb-2">Base</div><div id="rigLocation" class="text-[14px] font-medium"></div></div>
+      <div class="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5 card-hover hover:bg-white/[0.04]"><div id="rDevices" class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 mb-2">Hardware rig</div><div id="rigDevices" class="text-[14px] font-medium"></div></div>
+      <div class="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5 card-hover hover:bg-white/[0.04]"><div id="rFocus" class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 mb-2">Current work</div><div id="rigFocus" class="text-[14px] font-medium"></div></div>
+      <div class="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5 card-hover hover:bg-white/[0.04]"><div id="rStack" class="font-mono text-[11px] uppercase tracking-widest text-zinc-500 mb-2">Core toolchain</div><div id="rigStack" class="text-[14px] font-medium font-mono"></div></div>
     </div>
   </section>
 
-  <div class="principle">
-    <blockquote id="notesText"></blockquote>
-    <cite class="mono" id="notesCite">Engineering principle</cite>
+  <!-- PRINCIPLE -->
+  <div class="py-14 border-t border-white/[0.07]">
+    <blockquote id="notesText" class="text-[clamp(1.25rem,2.8vw,1.7rem)] font-semibold tracking-[-0.02em] leading-[1.45] max-w-[32ch] text-balance border-l-2 border-orange-500 pl-6"></blockquote>
+    <cite id="notesCite" class="block mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-500 not-italic pl-6">Engineering principle</cite>
   </div>
 
-  <section class="block" id="contact" aria-labelledby="tCtaTitle">
-    <div class="contact">
+  <!-- CONTACT -->
+  <section id="contact" class="pb-16" aria-labelledby="tCtaTitle">
+    <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-8 sm:p-10 grid lg:grid-cols-[1fr_auto] gap-6 items-center">
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-orange-600/20 blur-[100px] rounded-full pointer-events-none"></div>
       <div>
-        <h2 id="tCtaTitle">Have an idea about low-level systems?</h2>
-        <p id="tCtaSub"></p>
+        <h2 id="tCtaTitle" class="text-[clamp(1.4rem,3vw,1.9rem)] font-bold tracking-[-0.02em] mb-2">Have an idea about low-level systems?</h2>
+        <p id="tCtaSub" class="text-sm text-zinc-400 max-w-[52ch]"></p>
       </div>
-      <div class="actions">
-        <a class="btn btn-solid" id="ctaEmail2" href="mailto:mhdwildhan@gmail.com">Email Wildhan</a>
-        <a class="btn" id="footTg" href="https://t.me/noticesa" target="_blank" rel="noopener">Ping on Telegram</a>
+      <div class="flex flex-wrap gap-3">
+        <a id="ctaEmail2" href="mailto:mhdwildhan@gmail.com" class="inline-flex items-center min-h-[46px] px-5 rounded-xl bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition">Email Wildhan →</a>
+        <a id="footTg" href="https://t.me/noticesa" target="_blank" rel="noopener" class="inline-flex items-center min-h-[46px] px-5 rounded-xl border border-white/15 text-sm font-semibold hover:border-orange-500/70 transition">Ping on Telegram</a>
       </div>
     </div>
   </section>
 </main>
-<footer>
-  <div class="foot">
-    <div>© <span id="year"></span> <span id="footerName">Muhammad Wildhan Anatayya</span>. <span id="tFootTag"></span></div>
-    <div class="foot-links"><a href="https://github.com/itswill00" target="_blank" rel="noopener">GitHub</a><a id="footTg2" href="https://t.me/noticesa" target="_blank" rel="noopener">Telegram</a><a href="https://t.me/blueforbanister" target="_blank" rel="noopener">Channel</a></div>
+
+<footer class="border-t border-white/[0.07]">
+  <div class="max-w-5xl mx-auto px-5 py-8 flex flex-wrap gap-3 items-center justify-between text-[12.5px] text-zinc-500">
+    <div>© <span id="year"></span> <span id="footerName" class="text-zinc-300">Muhammad Wildhan Anatayya</span> · <span id="tFootTag"></span></div>
+    <div class="flex gap-1">
+      <a href="https://github.com/itswill00" target="_blank" rel="noopener" class="min-h-[44px] inline-flex items-center px-3 rounded-lg hover:text-white transition">GitHub</a>
+      <a id="footTg2" href="https://t.me/noticesa" target="_blank" rel="noopener" class="min-h-[44px] inline-flex items-center px-3 rounded-lg hover:text-white transition">Telegram</a>
+      <a href="https://t.me/blueforbanister" target="_blank" rel="noopener" class="min-h-[44px] inline-flex items-center px-3 rounded-lg hover:text-white transition">Channel</a>
+    </div>
   </div>
 </footer>
-<div class="toast" id="toast" role="status"></div>
+
+<div id="toast" role="status" class="fixed bottom-5 left-1/2 -translate-x-1/2 translate-y-2 bg-white text-black px-4 py-2.5 rounded-xl text-[13px] font-semibold opacity-0 pointer-events-none transition-all duration-200 z-[99]"></div>
+<noscript><div style="max-width:1024px;margin:0 auto;padding:24px;font-family:system-ui;color:#fff">This portfolio needs JavaScript to load projects from config.json.</div></noscript>
+
 <script>
 let CFG=null;let currentLang=localStorage.getItem('lang')||'en';
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);}
-function showError(h){const el=document.getElementById('actError');el.innerHTML=h;el.style.display='block';}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.remove('opacity-0','translate-y-2');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.add('opacity-0','translate-y-2'),2200);}
+function showError(h){const el=document.getElementById('actError');el.innerHTML=h;el.classList.remove('hidden');}
 async function init(){
   document.getElementById('year').textContent=new Date().getFullYear();
   try{
     const r=await fetch('config.json?ts='+Date.now(),{cache:'no-store'});
     if(!r.ok) throw new Error('http '+r.status);
     CFG=await r.json();
-    document.getElementById('actError').style.display='none';
+    document.getElementById('actError').classList.add('hidden');
     renderAll();
   }catch(e){
     document.getElementById('actStack').innerHTML='';
-    showError('Could not load config.json. Check the file exists and is valid JSON, then <a href="" onclick="location.reload();return false">reload</a>.');
+    showError('Could not load config.json. Check the file exists and is valid JSON, then <a class="underline" href="" onclick="location.reload();return false">reload</a>.');
   }
 }
 function T(){return (CFG.i18n&&CFG.i18n[currentLang])||CFG.i18n.en;}
@@ -234,14 +203,15 @@ function renderAll(){
   document.documentElement.lang=currentLang;
   document.getElementById('langBtn').textContent=currentLang.toUpperCase();
   const m=s.maintenance||{},bypass=new URLSearchParams(location.search).has('admin'),on=!!m.enabled&&!bypass;
-  document.getElementById('mOverlay').classList.toggle('on',on);
+  const ov=document.getElementById('mOverlay');
+  ov.classList.toggle('hidden',!on);ov.classList.toggle('grid',on);
   if(on){document.getElementById('mTitle').textContent=m.title||'Under maintenance';document.getElementById('mMsg').textContent=m.message||'Back shortly.';}
   document.querySelector('main').style.display=on?'none':'';document.querySelector('footer').style.display=on?'none':'';
-  if(p.name){document.title=p.name+', Builder';document.getElementById('panelName').textContent=p.name;document.getElementById('footerName').textContent=p.name;document.getElementById('navBrand').textContent=p.short_name||p.name.split(' ')[0];}
+  if(p.name){document.title=p.name+' — Builder';document.getElementById('panelName').textContent=p.name;document.getElementById('footerName').textContent=p.name;document.getElementById('navBrand').textContent=p.short_name||p.name.split(' ')[0];}
   if(s.domain) document.getElementById('navDomain').textContent=s.domain;
-  if(p.handle||p.telegram) document.getElementById('panelHandle').textContent='@'+(p.handle||s.handle||'noticesa');
+  if(p.handle||s.handle) document.getElementById('panelHandle').textContent='@'+(p.handle||s.handle||'noticesa');
   const img=document.getElementById('avatarImg'),ini=document.getElementById('avatarInitial');
-  if(p.photo){img.src=p.photo;img.style.display='block';ini.style.display='none';img.onerror=()=>{img.style.display='none';ini.style.display='block';};}else{img.style.display='none';ini.style.display='block';}
+  if(p.photo){img.src=p.photo;img.classList.remove('hidden');ini.style.display='none';img.onerror=()=>{img.classList.add('hidden');ini.style.display='block';};}else{img.classList.add('hidden');ini.style.display='block';}
   const loc=typeof f.location==='object'?(f.location[currentLang]||f.location.en||''):f.location||'';
   const foc=typeof f.focus==='object'?(f.focus[currentLang]||f.focus.en||''):f.focus||'';
   document.getElementById('heroKicker').textContent=loc||s.domain||'';
@@ -253,8 +223,7 @@ function renderAll(){
   document.getElementById('rigDevices').textContent=f.devices||'';
   document.getElementById('factFocus').textContent=foc;
   document.getElementById('rigFocus').textContent=foc;
-  const stk=Array.isArray(f.stack)?f.stack.join('  |  '):'';
-  document.getElementById('rigStack').textContent=stk;
+  document.getElementById('rigStack').textContent=Array.isArray(f.stack)?f.stack.join('  ·  '):'';
   document.getElementById('tBase').textContent=t.lbl_location||'Base';
   document.getElementById('tRig').textContent=t.lbl_devices||'Rig';
   document.getElementById('tFocus').textContent=t.lbl_focus||'Focus';
@@ -263,7 +232,7 @@ function renderAll(){
   document.getElementById('rFocus').textContent=t.lbl_focus||'Focus';
   document.getElementById('rStack').textContent=t.lbl_stack||'Stack';
   const chips=document.getElementById('chipsRow');chips.innerHTML='';
-  (f.stack||[]).forEach(x=>{const c=document.createElement('span');c.className='chip mono';c.textContent=x;chips.appendChild(c);});
+  (f.stack||[]).forEach(x=>{const c=document.createElement('span');c.className='font-mono text-[11.5px] px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-zinc-300';c.textContent=x;chips.appendChild(c);});
   if(p.email){['ctaEmail','ctaEmail2','sEmail'].forEach(id=>{document.getElementById(id).href='mailto:'+p.email;});}
   if(p.telegram){['ctaTg','footTg','footTg2','sTg'].forEach(id=>{const e=document.getElementById(id);if(e)e.href=p.telegram;});}
   if(p.github){document.getElementById('sGithub').href=p.github;}
@@ -272,26 +241,31 @@ function renderAll(){
   document.getElementById('tRigTitle').textContent=t.sec_about||'Hardware and environment';
   document.getElementById('tRigSub').textContent=t.sec_about_sub||'';
   document.getElementById('notesText').textContent='\u201C'+(t.notes_text||'')+'\u201D';
-  document.getElementById('notesCite').textContent=(t.sec_notes||'Principle')+' : '+(t.sec_notes_sub||'');
+  document.getElementById('notesCite').textContent=(t.sec_notes||'Principle')+' — '+(t.sec_notes_sub||'');
   document.getElementById('tCtaTitle').textContent=t.cta_title||'';
   document.getElementById('tCtaSub').textContent=t.cta_sub||'';
   const em=t.btn_email||'Email';
-  document.getElementById('ctaEmail').textContent=em+' Wildhan';
-  document.getElementById('ctaEmail2').textContent=em+' Wildhan';
+  document.getElementById('ctaEmail').textContent=em+' Wildhan →';
+  document.getElementById('ctaEmail2').textContent=em+' Wildhan →';
   document.getElementById('tFootTag').textContent=t.footer_tag||'';
   const wrap=document.getElementById('actStack');wrap.innerHTML='';
   const acts=(CFG.activities||[]).filter(a=>a.enabled!==false).sort((a,b)=>(a.order||0)-(b.order||0));
   document.getElementById('projCount').textContent=acts.length+' items';
-  if(!acts.length){wrap.innerHTML='<div class="state">No projects enabled right now. Enable items in config.json to fill this list.</div>';return;}
+  if(!acts.length){wrap.innerHTML='<div class="rounded-xl border border-white/10 p-5 text-sm text-zinc-400">No projects enabled right now.</div>';return;}
   acts.forEach((item,i)=>{
-    const a=document.createElement('a');a.className='proj'+(i===0?' featured':'');a.href=item.href||'#';
+    const a=document.createElement('a');a.className='group grid grid-cols-[40px_1fr_auto] gap-4 items-start rounded-xl border border-white/[0.08] bg-white/[0.02] p-5 card-hover hover:bg-white/[0.04] hover:border-white/[0.14]';
+    a.href=item.href||'#';
     if((item.href||'').startsWith('http')){a.target='_blank';a.rel='noopener';}
     const d=typeof item.desc==='object'?(item.desc[currentLang]||item.desc.en||''):item.desc||'';
     const num=String(i+1).padStart(2,'0');
-    a.innerHTML='<span class="idx mono">'+num+'</span><span><h3></h3><p></p><div class="meta mono"></div></span><span class="go">Open</span>';
-    a.querySelector('h3').textContent=item.title||'Untitled';
-    a.querySelector('p').textContent=d;
-    a.querySelector('.meta').textContent=(item.meta||item.tag||'').replace(/ \| (Public|Private)/gi,'').trim();
+    const h=document.createElement('span');h.className='font-mono text-[12px] text-orange-400/90 pt-1';h.textContent=num;
+    const mid=document.createElement('span');mid.className='min-w-0';
+    const title=document.createElement('span');title.className='block font-semibold tracking-tight text-[16px] mb-1.5';title.textContent=item.title||'Untitled';
+    const desc=document.createElement('span');desc.className='block text-[13.5px] text-zinc-400 leading-relaxed';desc.textContent=d;
+    const meta=document.createElement('span');meta.className='block font-mono text-[11px] text-zinc-500 mt-2.5';meta.textContent=(item.meta||item.tag||'').replace(/ \| (Public|Private)/gi,'').trim();
+    mid.append(title,desc,meta);
+    const go=document.createElement('span');go.className='proj-arrow w-10 h-10 rounded-lg border border-white/10 grid place-items-center text-zinc-400 group-hover:text-black group-hover:bg-white group-hover:border-white';go.textContent='↗';
+    a.append(h,mid,go);
     wrap.appendChild(a);
   });
 }
